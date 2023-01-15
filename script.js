@@ -60,13 +60,37 @@
 
               //  Condition for not choosing to enter any criteria for the PW
               if (confirmAlphaLower===false && confirmAlphaUpper===false && confirmNumber===false && confirmCharacter===false){
-                  alert("You must choose one of the criteria!");
+                  selections = alert("You must choose one of the criteria!");
                } 
                    
 // Step 6:
 // WHEN all prompts are answered
 // THEN a password is generated that matches the selected criteria
+              if (confirmAlphaLower){
+                  selections = selections.concat(alphaLower);
+                  } 
+              if (confirmAlphaUpper){
+                  selections = selections.concat(alphaUpper);
+                  }
+              if (confirmNumber){
+                  selections = selections.concat(number);
+                  } 
+              if (confirmCharacter){
+                  selections = selections.concat(charValue);
+                } 
+              console.log(selections);
+             
+              // create an empty array to hold the values from the var selections
+              var password = [];
 
+              for (var i=0; i < confirmEnter; i++ ){
+                var pickSelections = selections[Math.floor(Math.random() * selections.lenght)]; 
+                password.push(pickSelections);
+              }
+
+              return generatePassword;
+
+                }
 
 // Step 7:
 // WHEN the password is generated
