@@ -26,7 +26,9 @@
             var confirmCharacter;
             var confirmAlphaLower;
             var confirmAlphaUpper;
-            var selections;
+
+            // array to store the selected criteria for the random password 
+            var selections = [];
 
             function generatePassword(){
 
@@ -40,19 +42,22 @@
 // WHEN asked for character types to include in the password
 // THEN I confirm whether or not to include lowercase, uppercase, numeric, and/or special characters
 
-              //Conditions to validate the user input (if not a numeric value)
-              if (confirmEnter===false) {
-                  alert("Invalid Entry: Please enter a numeric value!"); 
-              } else if (confirmEnter < 8 || 128 < confirmEnter) {
-                  // Validates user's input (if the numeric value is outside of the defined parameters, the value is not accepted).
-                  confirmEnter = parseInt(prompt("Invalid entry: Please enter the numeric value between 8 and 128."));
-              } else {
-                  // Begins prompts for input of other values using the Window confirm() method.
+                while (confirmEnter < 7 || confirmEnter > 129){
+                // Validates user's input (if the numeric value is outside of the defined parameters, the value is not accepted).
+                confirmEnter = parseInt(prompt("Invalid entry: Please enter the numeric value between 8 and 128."));}
+
+                while (confirmEnter===false) {
+                alert("Invalid Entry: Please enter a numeric value!");
+                confirmEnter = parseInt(prompt("How long would you like your password to be? Select numeric value between 8 and 128."));
+                }
+                
+                // Begins prompts for input of other values using the Window confirm() method.
                   confirmAlphaLower = confirm ("Will it include Lowercase letters? If Yes - Click OK. If No - Click Cancel.");
                   confirmAlphaUpper = confirm("Will it include Uppercase letters? If Yes - Click OK. If No - Click Cancel.");
                   confirmNumber = confirm("Will it contain numbers? If Yes - Click OK. If No - Click Cancel.");
                   confirmCharacter = confirm("Will it contain Special Characters? If Yes - Click OK. If No - Click Cancel.");
-              }
+                
+
 
 // Step 5:
 // WHEN I answer each prompt
@@ -60,12 +65,14 @@
 
               //  Condition for not choosing to enter any criteria for the PW
               if (confirmAlphaLower===false && confirmAlphaUpper===false && confirmNumber===false && confirmCharacter===false){
-                  selections = alert("You must choose one of the criteria!");
+                  alert("You must choose one of the criteria!");
                } 
                    
 // Step 6:
 // WHEN all prompts are answered
 // THEN a password is generated that matches the selected criteria
+
+               //based on the criteria selected, the assigned values will be selected for the generation of the random password. 
               if (confirmAlphaLower){
                   selections = selections.concat(alphaLower);
                   } 
@@ -78,17 +85,14 @@
               if (confirmCharacter){
                   selections = selections.concat(charValue);
                 } 
-              console.log(selections);
              
-              // create an empty array to hold the values from the var selections
-              var password = [];
+              // create an empty string to hold the values from the selections array
+              var newPassword = '';
 
               for (var i=0; i < confirmEnter; i++ ){
-                var pickSelections = selections[Math.floor(Math.random() * selections.lenght)]; 
-                password.push(pickSelections);
+                newPassword = newPassword + selections[Math.floor(Math.random() * selections.length)]; 
               }
-
-              return generatePassword;
+              return newPassword;
 
                 }
 
